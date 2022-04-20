@@ -300,15 +300,17 @@ int main(int argc, char *argv[]) {
       transfer_ir(devh, ir_data, ir_data_size, extend);
     }
     else if (receive_mode == 1) {
-      printf("Receive mode\n");
-      memset(buf, 0x00, ir_data_size);
-      r = receive_ir(devh, buf, ir_data_size, extend);
-      if (r == 1) {
-        printf("  Received code: ");
-        for (i = 0; i < ir_data_size; i++) {
-          printf("%02X", buf[i]);
+      while (1) {
+        printf("Receive mode\n");
+        memset(buf, 0x00, ir_data_size);
+        r = receive_ir(devh, buf, ir_data_size, extend);
+        if (r == 1) {
+          printf("  Received code: ");
+          for (i = 0; i < ir_data_size; i++) {
+            printf("%02X", buf[i]);
+          }
+          printf("\n");
         }
-        printf("\n");
       }
     }
 
